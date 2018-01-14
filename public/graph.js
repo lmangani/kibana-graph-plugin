@@ -18,15 +18,15 @@ function ForceGraphProvider(Private) {
     return new TemplateVisType({
         name: 'graph',
         title: 'Force graph',
-        description: 'D3 force layout in Kibana souce',
+        description: 'D3 force layout for Kibana',
         icon: 'fa-share-alt',
         template: graphVisTemplate,
         params: {
              defaults: {
                 label: 'Fontsize',
-                fontSize: 10,
+                fontSize: 14,
                 alphaTarget: 0.3,
-                distanceMax: 400,
+                distanceMax: 300,
                 strength: -200,
                 radius: 6,
                 metrics: [{ "id": "", "title": "", "field": "", "type": "" }],
@@ -54,6 +54,7 @@ function ForceGraphProvider(Private) {
                 group: 'metrics',
                 name: 'metric',
                 title: 'Metric',
+                icon: 'fa fa-tachometer',
                 min: 1,
                 max: 4,
                 defaults: [{
@@ -65,9 +66,27 @@ function ForceGraphProvider(Private) {
                 group: 'buckets',
                 name: 'bucket',
                 title: 'Field',
-                aggFilter: '!geohash_grid',
+                icon: 'fa fa-circle-thin',
+                mustBeFirst: 'true',
+                aggFilter: ['terms']
                 min: 1,
-                max: 5
+                max: 2
+            },
+            {
+                group: 'buckets',
+                name: 'relation',
+                icon: 'fa fa-random',
+                title: 'Relation',
+                max: 1,
+                aggFilter: ['terms']
+            },
+            {
+                group: 'buckets',
+                name: 'colornode',
+                icon: 'fa fa-paint-brush',
+                title: 'Node Color',
+                max: 1,
+                aggFilter: ['terms']
             }
         ]),
         requiresSearch: true
